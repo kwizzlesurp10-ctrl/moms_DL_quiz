@@ -55,7 +55,9 @@
     "format:check": "prettier --check .",
     "prepublishOnly": "npm run lint && npm run build && npm test",
     "pack:dry-run": "npm pack --dry-run",
-    "quickstart": "npm run build && node ./examples/quickstart.mjs"
+    "quickstart": "npm run build && node ./examples/quickstart.mjs",
+    "vercel:deploy": "npx vercel",
+    "vercel:prod": "npx vercel --prod"
   },
   "dependencies": {
     "zod": "^3.24.4"
