@@ -1,0 +1,442 @@
+[
+  {
+    "id": 1,
+    "q": "You may pass another vehicle if the line dividing your lane from the lane you wish to enter is a ____ line.",
+    "options": ["Broken white", "Double solid yellow", "Solid yellow", "Solid white"],
+    "correct": 0,
+    "explanation": "Broken white lines mean you may pass or change lanes when safe. Double solid yellow means no passing in either direction."
+  },
+  {
+    "id": 2,
+    "q": "When making a turn, you must ____ your speed.",
+    "options": ["Increase", "Maintain", "Vary", "Reduce"],
+    "correct": 3,
+    "explanation": "Always reduce your speed before turning to maintain control and allow time to scan for hazards."
+  },
+  {
+    "id": 3,
+    "q": "To prepare for anything coming up on the road ahead, you should:",
+    "options": [
+      "Continually scan the entire road and all roadsides",
+      "Stare straight ahead at all times",
+      "Drive with your left foot resting lightly on the brake pedal",
+      "Maintain focus toward the middle of the road"
+    ],
+    "correct": 0,
+    "explanation": "Use the SIPDE system: Scan continuously. This is one of the most important safe driving habits."
+  },
+  {
+    "id": 4,
+    "q": "You are driving on a busy street, and your vehicle’s accelerator sticks open. What should you do first?",
+    "options": [
+      "Blow your horn",
+      "Slam on your brakes",
+      "Shift to neutral and steer to the side of the road",
+      "Turn on your four-way flashers only"
+    ],
+    "correct": 2,
+    "explanation": "Shift to neutral immediately to disengage the engine, then steer safely off the road and use brakes."
+  },
+  {
+    "id": 5,
+    "q": "When approaching a reduced conflict intersection, you may not turn left from the main road.",
+    "options": ["True", "False"],
+    "correct": 0,
+    "explanation": "True. Reduced conflict intersections (common in MN) are designed so you cannot make left turns from the main highway — you use a right turn then U-turn instead."
+  },
+  {
+    "id": 6,
+    "q": "At night, it is hardest to see:",
+    "options": ["Road signs", "Pedestrians", "Other motorists", "Streetlights"],
+    "correct": 1,
+    "explanation": "Pedestrians are hardest to see at night because they often wear dark clothing and are not illuminated like cars or signs."
+  },
+  {
+    "id": 7,
+    "q": "If you stop along the road at night because of a breakdown:",
+    "options": [
+      "Turn off all your lights",
+      "Use your parking lights only",
+      "Use your headlights only",
+      "Turn on your emergency flashers and leave low beams on"
+    ],
+    "correct": 3,
+    "explanation": "Use emergency flashers + low beams so other drivers can see you from far away."
+  },
+  {
+    "id": 8,
+    "q": "Pedestrians using guide dogs or white canes must be given the right-of-way:",
+    "options": [
+      "Only at corners",
+      "Only at intersections with traffic controls",
+      "At all times when they are crossing or about to cross",
+      "Never — they must wait for assistance"
+    ],
+    "correct": 2,
+    "explanation": "Always yield to anyone with a white cane or guide dog. They have the right-of-way everywhere."
+  },
+  {
+    "id": 9,
+    "q": "Before you leave a parallel parking space, you should:",
+    "options": [
+      "Sound your horn",
+      "Turn on your 4-way flashers",
+      "Look for traffic by turning your head over your shoulder",
+      "Only check your rear-view mirror"
+    ],
+    "correct": 2,
+    "explanation": "Always turn your head and look over your shoulder (blind spot check) before pulling out."
+  },
+  {
+    "id": 10,
+    "q": "On a road with three or more lanes traveling in the same direction, you should stay in the ____ lane except to pass.",
+    "options": ["Left-hand", "Shoulder", "Middle", "Right-hand"],
+    "correct": 3,
+    "explanation": "Stay in the right lane unless passing. The left lane is for passing only on multi-lane roads."
+  },
+  {
+    "id": 11,
+    "q": "When driving through fog or heavy rain, it is best to:",
+    "options": [
+      "Turn on your parking lights only",
+      "Turn on your 4-way hazard lights",
+      "Use low-beam headlights",
+      "Drive with high beams on"
+    ],
+    "correct": 2,
+    "explanation": "Low beams are required in fog/rain/snow. High beams reflect off the moisture and make it harder to see."
+  },
+  {
+    "id": 12,
+    "q": "Preparing to smoke or smoking while driving is considered:",
+    "options": [
+      "Helpful for alertness",
+      "Not distracting",
+      "A distracting activity",
+      "Only a problem at night"
+    ],
+    "correct": 2,
+    "explanation": "Any activity that takes your hands or eyes off the road is distracting. Smoking is explicitly listed as distracting in the manual."
+  },
+  {
+    "id": 13,
+    "q": "What does alcohol do to your driving skills and judgment?",
+    "options": [
+      "It has no effect",
+      "It harms only driving skills",
+      "It harms only judgment",
+      "It harms both driving skills and judgment"
+    ],
+    "correct": 3,
+    "explanation": "Alcohol impairs reaction time, vision, judgment, and coordination — everything you need to drive safely."
+  },
+  {
+    "id": 14,
+    "q": "A red arrow pointing to the right on a traffic light means:",
+    "options": [
+      "Turn right after coming to a complete stop",
+      "Do not turn right until the light turns green",
+      "Turn right after slowing down",
+      "Turn right only if no pedestrians are present"
+    ],
+    "correct": 1,
+    "explanation": "A red arrow means you must wait for a green arrow or green light before turning in that direction."
+  },
+  {
+    "id": 15,
+    "q": "When you enter traffic from a stop (pulling away from the curb), you should:",
+    "options": [
+      "Drive slower than traffic for 200 feet",
+      "Wait for a large enough gap to reach the speed of traffic safely",
+      "Pull out immediately after the first car passes",
+      "Use your horn to warn others"
+    ],
+    "correct": 1,
+    "explanation": "You need a big enough gap so you can accelerate up to the speed of traffic without causing others to brake suddenly."
+  },
+  {
+    "id": 16,
+    "q": "You should always use your emergency flashers when:",
+    "options": [
+      "You are double-parked in a traffic lane",
+      "You are parked in a marked parking spot",
+      "Your vehicle has broken down on the roadway",
+      "You are driving in heavy rain"
+    ],
+    "correct": 2,
+    "explanation": "Use flashers when you are stopped on the roadway or shoulder due to a breakdown or emergency."
+  },
+  {
+    "id": 17,
+    "q": "The traffic light is red, but a police officer is directing you to proceed. What should you do?",
+    "options": [
+      "Refuse to move",
+      "Proceed as the officer directs",
+      "Honk your horn and wait",
+      "Ignore the officer and obey the light"
+    ],
+    "correct": 1,
+    "explanation": "A police officer’s directions always override traffic signals and signs."
+  },
+  {
+    "id": 18,
+    "q": "If you are under 18 and your cell phone rings while driving, what should you do?",
+    "options": [
+      "Answer it if you have a hands-free device",
+      "Let it go to voicemail",
+      "Answer only if it's your parent",
+      "Text the caller that you are driving"
+    ],
+    "correct": 1,
+    "explanation": "Under 18 drivers in MN have stricter rules. The safest and legal choice is to let it ring and call back later when stopped."
+  },
+  {
+    "id": 19,
+    "q": "At night, if an oncoming vehicle does not dim its high beams, you should:",
+    "options": [
+      "Look toward the center of the roadway",
+      "Look toward the right edge of your lane",
+      "Look toward the left edge of your lane",
+      "Close your eyes briefly"
+    ],
+    "correct": 1,
+    "explanation": "Look at the right edge of the road so the bright lights don't blind you and you can still see the lane."
+  },
+  {
+    "id": 20,
+    "q": "Teenage drivers are more likely to be involved in a crash when:",
+    "options": [
+      "Driving with adult passengers",
+      "Driving with teenage passengers",
+      "Driving alone",
+      "Driving during the day"
+    ],
+    "correct": 1,
+    "explanation": "Distraction from friends in the car is a major cause of teen crashes. The manual highlights this risk."
+  },
+  {
+    "id": 21,
+    "q": "You must use your headlights:",
+    "options": [
+      "Only at night",
+      "On rainy, snowy, or foggy days",
+      "Only when it's completely dark",
+      "Only on highways"
+    ],
+    "correct": 1,
+    "explanation": "Minnesota law requires headlights whenever visibility is poor (less than 500 feet) or in rain, snow, sleet, hail, or fog."
+  },
+  {
+    "id": 22,
+    "q": "When you want to make a right turn, your car should be positioned:",
+    "options": [
+      "Near the center of the street",
+      "Close to the left side of the street",
+      "Close to the right side of the street",
+      "In the middle of the right lane"
+    ],
+    "correct": 2,
+    "explanation": "Always position yourself close to the right curb or edge before making a right turn."
+  },
+  {
+    "id": 23,
+    "q": "When a traffic light turns green, should you go immediately?",
+    "options": [
+      "Yes, or you could get a ticket for causing gridlock",
+      "No — wait 5 seconds first",
+      "Yes, but only after yielding to vehicles or pedestrians still in the intersection",
+      "No — always wait for the car in front of you to move first"
+    ],
+    "correct": 2,
+    "explanation": "Even on green, you must yield to anyone still legally in the intersection and make sure it's clear."
+  },
+  {
+    "id": 24,
+    "q": "If you see orange construction signs and cones on a freeway, you must:",
+    "options": [
+      "Maintain your current speed",
+      "Be prepared for workers and equipment ahead and slow down if workers are present",
+      "Change lanes immediately",
+      "Ignore them if no workers are visible"
+    ],
+    "correct": 1,
+    "explanation": "Orange = construction. Slow down, watch for workers, and fines are doubled ($300+) if workers are present."
+  },
+  {
+    "id": 25,
+    "q": "What is the correct following distance in good weather conditions?",
+    "options": ["1 second", "2 seconds", "3 seconds", "5 seconds"],
+    "correct": 2,
+    "explanation": "Use the 3-second rule in good conditions. Count 'one-thousand-one, one-thousand-two...' as the car ahead passes a fixed point."
+  },
+  {
+    "id": 26,
+    "q": "When approaching a school bus with flashing red lights and an extended stop arm, you must:",
+    "options": [
+      "Slow down and proceed with caution",
+      "Stop at least 20 feet away and remain stopped until the lights are off and arm is retracted",
+      "Pass on the right if there is room",
+      "Only stop if children are visible"
+    ],
+    "correct": 1,
+    "explanation": "This is one of the strictest rules. Violation can result in large fines and license suspension."
+  },
+  {
+    "id": 27,
+    "q": "In Minnesota, the hands-free cell phone law means:",
+    "options": [
+      "You can hold your phone if you're just talking",
+      "You cannot hold your phone at all while the vehicle is in motion or stopped in traffic",
+      "You can only use it for GPS",
+      "It only applies to drivers under 18"
+    ],
+    "correct": 1,
+    "explanation": "You may not hold the phone in your hand for any reason while driving or stopped in traffic. Mount it or use voice commands."
+  },
+  {
+    "id": 28,
+    "q": "What does a solid white line on the pavement mean?",
+    "options": [
+      "You may change lanes freely",
+      "Lane changes are discouraged or prohibited",
+      "It is a passing zone",
+      "It marks the edge of the road only"
+    ],
+    "correct": 1,
+    "explanation": "Solid white lines mean you should stay in your lane. Crossing is discouraged and often illegal."
+  },
+  {
+    "id": 29,
+    "q": "If you are approaching a railroad crossing with flashing red lights and lowered gates, you must:",
+    "options": [
+      "Slow down and look both ways",
+      "Stop at least 10 feet from the nearest rail and remain stopped until the lights stop flashing",
+      "Proceed if no train is visible",
+      "Cross quickly before the gates fully lower"
+    ],
+    "correct": 1,
+    "explanation": "Never try to beat a train. Stop and wait until the lights stop and gates go up."
+  },
+  {
+    "id": 30,
+    "q": "The legal blood alcohol concentration (BAC) limit for regular drivers in Minnesota is:",
+    "options": ["0.05%", "0.08%", "0.10%", "0.00% (zero tolerance for everyone)"],
+    "correct": 1,
+    "explanation": "0.08% for regular drivers. 0.04% for commercial drivers. Even below the limit, you can be charged if impaired."
+  },
+  {
+    "id": 31,
+    "q": "When parking on a hill with a curb, facing downhill, you should turn your wheels:",
+    "options": [
+      "Toward the curb",
+      "Away from the curb",
+      "Straight ahead",
+      "It doesn't matter"
+    ],
+    "correct": 0,
+    "explanation": "Turn wheels toward the curb so the car will roll into the curb if the brakes fail."
+  },
+  {
+    "id": 32,
+    "q": "What should you do when you see a vehicle with flashing blue or red lights approaching from behind?",
+    "options": [
+      "Speed up to get out of the way",
+      "Pull to the right and stop",
+      "Move to the left lane",
+      "Continue driving normally"
+    ],
+    "correct": 1,
+    "explanation": "Pull over to the right shoulder and stop completely. This is for emergency vehicles."
+  },
+  {
+    "id": 33,
+    "q": "In a roundabout, you should:",
+    "options": [
+      "Yield to traffic already in the circle and drive counterclockwise",
+      "Enter without yielding if you are in a hurry",
+      "Drive clockwise",
+      "Stop in the middle of the roundabout"
+    ],
+    "correct": 0,
+    "explanation": "Always yield to vehicles already circulating. Drive counterclockwise and use your right turn signal when exiting."
+  },
+  {
+    "id": 34,
+    "q": "Minnesota’s Move Over Law requires you to:",
+    "options": [
+      "Only slow down for police cars",
+      "Slow down and move over one lane (if safe) when approaching any stopped emergency, tow, or maintenance vehicle with flashing lights",
+      "Only move over on highways",
+      "Ignore it if traffic is heavy"
+    ],
+    "correct": 1,
+    "explanation": "This law protects first responders and tow truck drivers. It applies to any vehicle with flashing lights on the shoulder."
+  },
+  {
+    "id": 35,
+    "q": "What is the correct way to exit a parallel parking space?",
+    "options": [
+      "Back straight out without looking",
+      "Signal, check mirrors and blind spot, then back out slowly",
+      "Honk and back out quickly",
+      "Only check your rearview mirror"
+    ],
+    "correct": 1,
+    "explanation": "Always signal, check all mirrors and blind spots, and back out slowly while watching for traffic and pedestrians."
+  },
+  {
+    "id": 36,
+    "q": "If your car starts to skid on ice or snow, you should:",
+    "options": [
+      "Brake hard immediately",
+      "Turn the steering wheel in the opposite direction of the skid",
+      "Steer in the direction you want the front of the car to go and ease off the gas",
+      "Accelerate to regain control"
+    ],
+    "correct": 2,
+    "explanation": "Steer gently in the direction you want to go. Do not brake hard or overcorrect."
+  },
+  {
+    "id": 37,
+    "q": "A flashing yellow light means:",
+    "options": [
+      "Stop completely",
+      "Proceed with caution and yield to traffic already in the intersection",
+      "Speed up to clear the intersection",
+      "It is the same as a green light"
+    ],
+    "correct": 1,
+    "explanation": "Flashing yellow = caution. Slow down and be prepared to stop if necessary."
+  },
+  {
+    "id": 38,
+    "q": "How far in advance should you signal before changing lanes or turning?",
+    "options": ["50 feet", "100 feet", "200 feet", "Only when you start the maneuver"],
+    "correct": 1,
+    "explanation": "Signal at least 100 feet before turning or changing lanes in Minnesota."
+  },
+  {
+    "id": 39,
+    "q": "When driving near large trucks or buses, you should:",
+    "options": [
+      "Stay in their blind spots as little as possible",
+      "Follow closely so they can see you in their mirrors",
+      "Pass them on the right whenever possible",
+      "Assume they can see you at all times"
+    ],
+    "correct": 0,
+    "explanation": "Large vehicles have big blind spots ('No-Zones'). Avoid riding beside them. Pass quickly and safely on the left."
+  },
+  {
+    "id": 40,
+    "q": "If you are involved in a minor crash with no injuries, what should you do first?",
+    "options": [
+      "Leave the scene immediately",
+      "Move vehicles out of traffic if safe, then exchange information and report if required",
+      "Call the police even if no one is hurt",
+      "Take photos and leave without talking to the other driver"
+    ],
+    "correct": 1,
+    "explanation": "Protect the scene, move cars if possible, exchange info (license, insurance, contact), and report to police if damage is over a certain amount or if required by law."
+  }
+]

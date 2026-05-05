@@ -1,0 +1,77 @@
+{
+  "name": "moms-dl-quiz",
+  "version": "1.0.0",
+  "description": "Minnesota drivers license knowledge-practice toolkit: curated 40-question MN DPS-aligned bank with Zod validation, deterministic shuffles, graders, SIPDE-aligned study summaries, and Ohio-vs-MN flash cards.",
+  "keywords": [
+    "minnesota",
+    "drivers-license",
+    "dmv",
+    "dps",
+    "quiz",
+    "practice-test",
+    "drivers-education",
+    "sipde",
+    "road-rules",
+    "multiple-choice",
+    "zod"
+  ],
+  "license": "MIT",
+  "author": "KeefTeef10 (https://github.com/kwizzlesurp10-ctrl)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kwizzlesurp10-ctrl/moms_DL_quiz.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kwizzlesurp10-ctrl/moms_DL_quiz/issues"
+  },
+  "homepage": "https://github.com/kwizzlesurp10-ctrl/moms_DL_quiz#readme",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./questions.json": "./dist/minnesota-quiz-questions.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18.17"
+  },
+  "scripts": {
+    "build": "tsup && node ./scripts/copy-assets.mjs",
+    "clean": "rimraf dist",
+    "dev": "vitest",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepublishOnly": "npm run lint && npm run build && npm test",
+    "pack:dry-run": "npm pack --dry-run",
+    "quickstart": "npm run build && node ./examples/quickstart.mjs"
+  },
+  "dependencies": {
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.26.0",
+    "@types/node": "^22.14.4",
+    "eslint": "^9.26.0",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "globals": "^16.1.0",
+    "prettier": "^3.5.3",
+    "rimraf": "^6.1.3",
+    "tsup": "^8.5.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.32.1",
+    "vitest": "^3.2.4"
+  }
+}
