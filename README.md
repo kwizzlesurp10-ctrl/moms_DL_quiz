@@ -107,6 +107,18 @@ Supporting constants (`PASS_PERCENTAGE_THRESHOLD`, `BUNDLED_QUESTION_COUNT`, `MI
 
 Double-click [`Minnesota_Drivers_License_Quiz_for_Mom.html`](./Minnesota_Drivers_License_Quiz_for_Mom.html) for the zero-install Tailwind + Font Awesome experience—the npm package complements that UX for integrators who need programmable access.
 
+## Deploy to Vercel
+
+This repo is configured as a **static** site: [`vercel.json`](./vercel.json) maps `/` to [`Minnesota_Drivers_License_Quiz_for_Mom.html`](./Minnesota_Drivers_License_Quiz_for_Mom.html) and skips a real `npm install` / build on Vercel (the quiz loads Tailwind/fonts from CDNs).
+
+1. Push to GitHub, then **Import Project** at [vercel.com/new](https://vercel.com/new) (framework: **Other**), or deploy from CLI after `npx vercel login`:
+
+   ```bash
+   npm run vercel:prod
+   ```
+
+2. Prefer Git-backed deploys so every `git push` updates production.
+
 ## Contributing
 
 Issues and PRs welcome in [`moms_DL_quiz`](https://github.com/kwizzlesurp10-ctrl/moms_DL_quiz). Match the formatter (`npm run format`) plus strict lint/tests (`npm run prepublishOnly`) before sending changes.
@@ -119,6 +131,8 @@ Issues and PRs welcome in [`moms_DL_quiz`](https://github.com/kwizzlesurp10-ctrl
 | `npm test` | `vitest run` regression suite |
 | `npm run lint` | ESLint (type-checked) |
 | `npm run pack:dry-run` | Inspect tarball contents |
+| `npm run vercel:deploy` | Preview deploy (`npx vercel`) |
+| `npm run vercel:prod` | Production deploy (`npx vercel --prod`) |
 
 ## License
 
