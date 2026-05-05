@@ -15,6 +15,7 @@
         
         body {
             font-family: 'Inter', system_ui, sans-serif;
+            overflow-x: hidden;
         }
         
         .header-font {
@@ -76,6 +77,11 @@
             animation: fadeIn 0.4s ease-out;
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .fact-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -104,7 +110,7 @@
 
         .study-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
             gap: 1.5rem;
         }
 
@@ -114,91 +120,153 @@
             border-radius: 4px;
             font-weight: 600;
         }
+
+        @media (max-width: 639px) {
+            .big-text {
+                font-size: 1.05rem;
+                line-height: 1.55;
+            }
+            .question-text {
+                font-size: 1.12rem;
+            }
+            .option-btn {
+                font-size: 1rem;
+                padding: 0.875rem 1rem;
+            }
+            .large-btn {
+                font-size: 1.05rem;
+                padding: 0.875rem 1.5rem;
+            }
+        }
+
+        #nav-panel {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.28s ease, opacity 0.2s ease;
+        }
+        #nav-panel.is-open {
+            max-height: 420px;
+            opacity: 1;
+        }
+        @media (min-width: 1024px) {
+            #nav-panel {
+                max-height: none !important;
+                opacity: 1 !important;
+                overflow: visible !important;
+            }
+            #nav-panel.is-open {
+                max-height: none !important;
+            }
+            #nav-toggle {
+                display: none !important;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
     <!-- Top Navigation -->
-    <nav class="bg-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-x-4">
-                    <div class="w-14 h-14 bg-blue-700 rounded-2xl flex items-center justify-center">
-                        <i class="fas fa-car text-white text-3xl"></i>
+    <nav class="bg-white shadow-lg sticky top-0 z-50" aria-label="Main">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
+            <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between lg:gap-4">
+                <div class="flex items-center justify-between gap-3 min-w-0 lg:justify-start lg:flex-1">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <div class="w-11 h-11 sm:w-14 sm:h-14 shrink-0 bg-blue-700 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-car text-white text-2xl sm:text-3xl"></i>
+                        </div>
+                        <div class="min-w-0">
+                            <h1 class="text-lg sm:text-2xl lg:text-3xl font-bold text-slate-900 header-font leading-tight">MN Driver's Test</h1>
+                            <p class="text-xs sm:text-sm text-slate-500 -mt-0.5 sm:truncate">For Mom • Made with ❤️ by your son</p>
+                        </div>
                     </div>
-                    <div>
-                        <h1 class="text-3xl font-bold text-slate-900 header-font">MN Driver's Test</h1>
-                        <p class="text-sm text-slate-500 -mt-1">For Mom • Made with ❤️ by your son</p>
-                    </div>
+                    <button type="button" id="nav-toggle" onclick="toggleNav()" aria-expanded="false" aria-controls="nav-panel"
+                            class="shrink-0 lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-2xl border-2 border-slate-200 text-slate-700 hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600">
+                        <i class="fas fa-bars text-lg" id="nav-toggle-icon" aria-hidden="true"></i>
+                        <span class="sr-only">Open menu</span>
+                    </button>
                 </div>
-                
-                <div class="flex items-center gap-x-3">
-                    <div onclick="showSection('home')" 
-                         class="cursor-pointer px-5 py-2.5 text-sm font-semibold flex items-center gap-x-2 hover:bg-slate-100 rounded-3xl transition-colors">
-                        <i class="fas fa-home text-blue-600"></i>
+            <div id="nav-panel" class="w-full lg:w-auto lg:shrink-0">
+                <div class="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-stretch sm:items-center justify-stretch sm:justify-end gap-1 sm:gap-2 pt-3 lg:pt-0 border-t border-slate-100 lg:mt-0 lg:border-0">
+                    <div role="button" tabindex="0" onclick="navGo('home')" onkeydown="if(event.key==='Enter'||event.key===' ') { event.preventDefault(); navGo('home'); }"
+                         class="cursor-pointer px-4 py-3 sm:py-2.5 text-sm font-semibold flex items-center gap-2 hover:bg-slate-100 rounded-2xl sm:rounded-3xl transition-colors nav-item">
+                        <i class="fas fa-home text-blue-600 w-5 text-center" aria-hidden="true"></i>
                         <span>Home</span>
                     </div>
-                    <div onclick="showSection('study')" 
-                         class="cursor-pointer px-5 py-2.5 text-sm font-semibold flex items-center gap-x-2 hover:bg-slate-100 rounded-3xl transition-colors">
-                        <i class="fas fa-book text-blue-600"></i>
+                    <div role="button" tabindex="0" onclick="navGo('study')" onkeydown="if(event.key==='Enter'||event.key===' ') { event.preventDefault(); navGo('study'); }"
+                         class="cursor-pointer px-4 py-3 sm:py-2.5 text-sm font-semibold flex items-center gap-2 hover:bg-slate-100 rounded-2xl sm:rounded-3xl transition-colors nav-item">
+                        <i class="fas fa-book text-blue-600 w-5 text-center" aria-hidden="true"></i>
                         <span>Study Guide</span>
                     </div>
-                    <div onclick="showSection('quiz')" 
-                         class="cursor-pointer px-5 py-2.5 text-sm font-semibold flex items-center gap-x-2 hover:bg-slate-100 rounded-3xl transition-colors">
-                        <i class="fas fa-question-circle text-blue-600"></i>
+                    <div role="button" tabindex="0" onclick="navGo('quiz')" onkeydown="if(event.key==='Enter'||event.key===' ') { event.preventDefault(); navGo('quiz'); }"
+                         class="cursor-pointer px-4 py-3 sm:py-2.5 text-sm font-semibold flex items-center gap-2 hover:bg-slate-100 rounded-2xl sm:rounded-3xl transition-colors nav-item">
+                        <i class="fas fa-question-circle text-blue-600 w-5 text-center" aria-hidden="true"></i>
                         <span>Practice Quiz</span>
                     </div>
-                    <div onclick="showSection('differences')" 
-                         class="cursor-pointer px-5 py-2.5 text-sm font-semibold flex items-center gap-x-2 hover:bg-slate-100 rounded-3xl transition-colors">
-                        <i class="fas fa-exchange-alt text-blue-600"></i>
+                    <div role="button" tabindex="0" onclick="navGo('differences')" onkeydown="if(event.key==='Enter'||event.key===' ') { event.preventDefault(); navGo('differences'); }"
+                         class="cursor-pointer px-4 py-3 sm:py-2.5 text-sm font-semibold flex items-center gap-2 hover:bg-slate-100 rounded-2xl sm:rounded-3xl transition-colors nav-item">
+                        <i class="fas fa-exchange-alt text-blue-600 w-5 text-center" aria-hidden="true"></i>
                         <span>Ohio vs MN</span>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </nav>
 
     <!-- HOME SECTION -->
-    <div id="home" class="section max-w-5xl mx-auto px-6 pt-12 pb-20">
-        <div class="text-center mb-16">
-            <div class="inline-flex items-center gap-x-3 bg-white px-6 py-3 rounded-3xl shadow mb-6">
-                <div class="flex -space-x-2">
+    <div id="home" class="section max-w-5xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12 pb-12 sm:pb-20">
+        <div class="text-center mb-10 sm:mb-16">
+            <div class="inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-2 bg-white px-4 py-3 sm:px-6 rounded-2xl sm:rounded-3xl shadow mb-5 sm:mb-6 max-w-full text-sm sm:text-base">
+                <div class="flex -space-x-2 shrink-0">
                     <div class="w-9 h-9 bg-blue-600 rounded-full flex items-center justify-center ring-2 ring-white"><i class="fas fa-check text-white text-sm"></i></div>
                     <div class="w-9 h-9 bg-emerald-500 rounded-full flex items-center justify-center ring-2 ring-white"><i class="fas fa-check text-white text-sm"></i></div>
                 </div>
-                <span class="font-semibold text-emerald-700">100% based on official MN DPS materials</span>
+                <span class="font-semibold text-emerald-700 text-left sm:text-center">100% based on official MN DPS materials</span>
             </div>
             
-            <h2 class="text-6xl font-extrabold text-slate-900 tracking-tighter mb-4 header-font">Ready for your<br>Minnesota test, Mom?</h2>
-            <p class="max-w-2xl mx-auto text-2xl text-slate-600">This simple app has everything you need.<br>Big text, easy buttons, and all the real questions.</p>
+            <h2 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tighter mb-3 sm:mb-4 header-font leading-tight px-1">Ready for your<br>Minnesota test, Mom?</h2>
+            <p class="max-w-2xl mx-auto text-lg sm:text-2xl text-slate-600 px-1">This simple app has everything you need. Big text, easy buttons, and all the real questions.</p>
             
-            <div class="flex justify-center gap-x-4 mt-10">
+            <div class="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 sm:gap-x-4 mt-8 sm:mt-10 w-full max-w-md sm:max-w-none mx-auto px-1">
                 <button onclick="showSection('study')" 
-                        class="large-btn bg-white text-blue-700 border-2 border-blue-700 hover:bg-blue-50 px-10 py-4 flex items-center gap-x-3 shadow-xl">
+                        class="large-btn w-full sm:w-auto justify-center bg-white text-blue-700 border-2 border-blue-700 hover:bg-blue-50 px-8 sm:px-10 py-4 flex items-center gap-x-3 shadow-xl">
                     <i class="fas fa-book"></i>
                     <span>Start Studying</span>
                 </button>
                 <button onclick="showSection('quiz')" 
-                        class="large-btn bg-blue-700 hover:bg-blue-800 text-white px-10 py-4 flex items-center gap-x-3 shadow-xl">
+                        class="large-btn w-full sm:w-auto justify-center bg-blue-700 hover:bg-blue-800 text-white px-8 sm:px-10 py-4 flex items-center gap-x-3 shadow-xl">
                     <i class="fas fa-play"></i>
                     <span>Take the Quiz Now</span>
                 </button>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div class="bg-white rounded-3xl p-8 shadow-xl fact-card">
-                <div class="text-blue-600 mb-4"><i class="fas fa-clipboard-list fa-3x"></i></div>
-                <h3 class="text-2xl font-bold mb-3">40 Real Questions</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-xl fact-card">
+                <div class="text-blue-600 mb-4"><i class="fas fa-clipboard-list text-4xl sm:text-5xl"></i></div>
+                <h3 class="text-xl sm:text-2xl font-bold mb-3">40 Real Questions</h3>
                 <p class="text-slate-600 big-text">Exactly like the official test. Covers every topic from the Minnesota Driver’s Manual.</p>
             </div>
-            <div class="bg-white rounded-3xl p-8 shadow-xl fact-card">
-                <div class="text-emerald-600 mb-4"><i class="fas fa-check-circle fa-3x"></i></div>
-                <h3 class="text-2xl font-bold mb-3">Instant Feedback</h3>
+            <div class="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-xl fact-card">
+                <div class="text-emerald-600 mb-4"><i class="fas fa-check-circle text-4xl sm:text-5xl"></i></div>
+                <h3 class="text-xl sm:text-2xl font-bold mb-3">Instant Feedback</h3>
                 <p class="text-slate-600 big-text">See what you got right or wrong right away with clear explanations.</p>
             </div>
-            <div class="bg-white rounded-3xl p-8 shadow-xl fact-card">
-                <div class="text-amber-600 mb-4"><i class="fas fa-redo fa-3x"></i></div>
-                <h3 class="text-2xl font-bold mb-3">Practice as Much as You Want</h3>
+            <div class="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-xl fact-card">
+                <div class="text-amber-600 mb-4"><i class="fas fa-redo text-4xl sm:text-5xl"></i></div>
+                <h3 class="text-xl sm:text-2xl font-bold mb-3">Practice as Much as You Want</h3>
                 <p class="text-slate-600 big-text">Retake the quiz anytime. The more you practice, the more confident you'll feel tomorrow!</p>
             </div>
         </div>
@@ -210,25 +278,25 @@
     </div>
 
     <!-- STUDY GUIDE SECTION -->
-    <div id="study" class="section hidden max-w-6xl mx-auto px-6 py-12">
-        <div class="flex items-center justify-between mb-10">
-            <div>
-                <h2 class="text-5xl font-extrabold text-slate-900 header-font">Study Guide</h2>
-                <p class="text-2xl text-slate-600 mt-2">Read these key facts carefully. They're the most important things on the test!</p>
+    <div id="study" class="section hidden max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-8 sm:mb-10">
+            <div class="min-w-0">
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 header-font">Study Guide</h2>
+                <p class="text-lg sm:text-2xl text-slate-600 mt-2">Read these key facts carefully. They're the most important things on the test!</p>
             </div>
-            <button onclick="showSection('quiz')" class="large-btn bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 flex items-center gap-x-3">
+            <button onclick="showSection('quiz')" class="large-btn shrink-0 w-full sm:w-auto justify-center bg-emerald-600 hover:bg-emerald-700 text-white px-6 sm:px-8 py-4 flex items-center gap-x-3">
                 <span>I'm Ready — Start Quiz</span> <i class="fas fa-arrow-right"></i>
             </button>
         </div>
 
         <div class="study-grid">
             <!-- Road Signs -->
-            <div class="bg-white rounded-3xl p-8 shadow-xl border border-slate-100">
-                <div class="flex items-center gap-x-4 mb-6">
-                    <div class="w-12 h-12 bg-red-100 rounded-2xl flex items-center justify-center"><i class="fas fa-exclamation-triangle text-red-600 text-3xl"></i></div>
-                    <h3 class="text-3xl font-bold">Road Signs &amp; Markings</h3>
+            <div class="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-x-4 mb-6">
+                    <div class="w-12 h-12 bg-red-100 rounded-2xl flex items-center justify-center shrink-0"><i class="fas fa-exclamation-triangle text-red-600 text-2xl sm:text-3xl"></i></div>
+                    <h3 class="text-xl sm:text-3xl font-bold">Road Signs &amp; Markings</h3>
                 </div>
-                <ul class="space-y-4 text-lg">
+                <ul class="space-y-3 sm:space-y-4 text-base sm:text-lg">
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span><strong>Red signs</strong> = Stop or do not do something</span></li>
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span><strong>Yellow / Yellow-Green</strong> = Warning (school zones, curves, pedestrians)</span></li>
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span><strong>Orange</strong> = Construction / Work zone — slow down!</span></li>
@@ -239,12 +307,12 @@
             </div>
 
             <!-- Right of Way & Rules -->
-            <div class="bg-white rounded-3xl p-8 shadow-xl border border-slate-100">
-                <div class="flex items-center gap-x-4 mb-6">
-                    <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center"><i class="fas fa-hand-paper text-blue-600 text-3xl"></i></div>
-                    <h3 class="text-3xl font-bold">Right-of-Way Rules</h3>
+            <div class="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-x-4 mb-6">
+                    <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center shrink-0"><i class="fas fa-hand-paper text-blue-600 text-2xl sm:text-3xl"></i></div>
+                    <h3 class="text-xl sm:text-3xl font-bold">Right-of-Way Rules</h3>
                 </div>
-                <ul class="space-y-4 text-lg">
+                <ul class="space-y-3 sm:space-y-4 text-base sm:text-lg">
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span>At 4-way stop or no signs: <strong>Yield to the driver on your right</strong></span></li>
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span>Always yield to <strong>pedestrians</strong> in crosswalks (even unmarked)</span></li>
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span><strong>School bus</strong> with red lights + stop arm = STOP 20+ feet away. Do not pass!</span></li>
@@ -255,12 +323,12 @@
             </div>
 
             <!-- Speed & Passing -->
-            <div class="bg-white rounded-3xl p-8 shadow-xl border border-slate-100">
-                <div class="flex items-center gap-x-4 mb-6">
-                    <div class="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center"><i class="fas fa-tachometer-alt text-amber-600 text-3xl"></i></div>
-                    <h3 class="text-3xl font-bold">Speed &amp; Passing</h3>
+            <div class="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-x-4 mb-6">
+                    <div class="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center shrink-0"><i class="fas fa-tachometer-alt text-amber-600 text-2xl sm:text-3xl"></i></div>
+                    <h3 class="text-xl sm:text-3xl font-bold">Speed &amp; Passing</h3>
                 </div>
-                <ul class="space-y-4 text-lg">
+                <ul class="space-y-3 sm:space-y-4 text-base sm:text-lg">
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span>Default limits: <strong>30 mph</strong> in towns, <strong>55 mph</strong> on highways, <strong>10-15 mph</strong> in alleys</span></li>
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span>Always drive at a speed that is <strong>reasonable for conditions</strong> (weather, traffic)</span></li>
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span>Pass on the <strong>left</strong>. Return to right lane when you can see the other car in your mirror</span></li>
@@ -270,12 +338,12 @@
             </div>
 
             <!-- Winter & Night Driving -->
-            <div class="bg-white rounded-3xl p-8 shadow-xl border border-slate-100">
-                <div class="flex items-center gap-x-4 mb-6">
-                    <div class="w-12 h-12 bg-sky-100 rounded-2xl flex items-center justify-center"><i class="fas fa-snowflake text-sky-600 text-3xl"></i></div>
-                    <h3 class="text-3xl font-bold">Winter &amp; Night Driving (Very Important in MN!)</h3>
+            <div class="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-x-4 mb-6">
+                    <div class="w-12 h-12 bg-sky-100 rounded-2xl flex items-center justify-center shrink-0"><i class="fas fa-snowflake text-sky-600 text-2xl sm:text-3xl"></i></div>
+                    <h3 class="text-xl sm:text-3xl font-bold">Winter &amp; Night Driving (Very Important in MN!)</h3>
                 </div>
-                <ul class="space-y-4 text-lg">
+                <ul class="space-y-3 sm:space-y-4 text-base sm:text-lg">
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span><strong>Headlights ON</strong> when visibility is less than 500 feet OR in rain, snow, sleet, hail, or fog</span></li>
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span>Use <strong>low beams</strong> in snow, fog, or when following another car</span></li>
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span>Clear ALL snow and ice from windows, mirrors, and lights before driving</span></li>
@@ -286,12 +354,12 @@
             </div>
 
             <!-- Distracted Driving & Seat Belts -->
-            <div class="bg-white rounded-3xl p-8 shadow-xl border border-slate-100">
-                <div class="flex items-center gap-x-4 mb-6">
-                    <div class="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center"><i class="fas fa-mobile-alt text-purple-600 text-3xl"></i></div>
-                    <h3 class="text-3xl font-bold">Distracted Driving &amp; Seat Belts</h3>
+            <div class="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-x-4 mb-6">
+                    <div class="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center shrink-0"><i class="fas fa-mobile-alt text-purple-600 text-2xl sm:text-3xl"></i></div>
+                    <h3 class="text-xl sm:text-3xl font-bold">Distracted Driving &amp; Seat Belts</h3>
                 </div>
-                <ul class="space-y-4 text-lg">
+                <ul class="space-y-3 sm:space-y-4 text-base sm:text-lg">
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span><strong>Hands-free law</strong>: You may NOT hold your phone while driving — even at a red light! Use voice commands or a mounted phone only.</span></li>
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span><strong>Seat belts are PRIMARY law</strong> — police can stop you just for not wearing one. Everyone in every seat must be buckled!</span></li>
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span>Never text, scroll, or use social media while driving</span></li>
@@ -300,12 +368,12 @@
             </div>
 
             <!-- Alcohol & Other -->
-            <div class="bg-white rounded-3xl p-8 shadow-xl border border-slate-100">
-                <div class="flex items-center gap-x-4 mb-6">
-                    <div class="w-12 h-12 bg-rose-100 rounded-2xl flex items-center justify-center"><i class="fas fa-wine-glass-alt text-rose-600 text-3xl"></i></div>
-                    <h3 class="text-3xl font-bold">Alcohol, Drugs &amp; Other Rules</h3>
+            <div class="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-x-4 mb-6">
+                    <div class="w-12 h-12 bg-rose-100 rounded-2xl flex items-center justify-center shrink-0"><i class="fas fa-wine-glass-alt text-rose-600 text-2xl sm:text-3xl"></i></div>
+                    <h3 class="text-xl sm:text-3xl font-bold">Alcohol, Drugs &amp; Other Rules</h3>
                 </div>
-                <ul class="space-y-4 text-lg">
+                <ul class="space-y-3 sm:space-y-4 text-base sm:text-lg">
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span>Legal limit: <strong>0.08%</strong> BAC (0.04% for commercial). Even less can impair you!</span></li>
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span>Never drive after drinking or taking medications that make you drowsy</span></li>
                     <li class="flex gap-x-3"><i class="fas fa-check text-emerald-500 mt-1.5"></i> <span>Right turn on red: OK after full stop + yield, unless sign says no</span></li>
@@ -315,55 +383,55 @@
             </div>
         </div>
 
-        <div class="mt-12 bg-blue-900 text-white rounded-3xl p-10 text-center">
-            <h3 class="text-3xl font-bold mb-4">Pro Tip from the Manual</h3>
-            <p class="text-2xl max-w-3xl mx-auto">Use the <strong>SIPDE</strong> method every time you drive: <span class="font-bold">S</span>can, <span class="font-bold">I</span>dentify, <span class="font-bold">P</span>redict, <span class="font-bold">D</span>ecide, <span class="font-bold">E</span>xecute. It saves lives!</p>
+        <div class="mt-8 sm:mt-12 bg-blue-900 text-white rounded-2xl sm:rounded-3xl p-6 sm:p-10 text-center">
+            <h3 class="text-xl sm:text-3xl font-bold mb-3 sm:mb-4">Pro Tip from the Manual</h3>
+            <p class="text-lg sm:text-2xl max-w-3xl mx-auto">Use the <strong>SIPDE</strong> method every time you drive: <span class="font-bold">S</span>can, <span class="font-bold">I</span>dentify, <span class="font-bold">P</span>redict, <span class="font-bold">D</span>ecide, <span class="font-bold">E</span>xecute. It saves lives!</p>
         </div>
     </div>
 
     <!-- DIFFERENCES SECTION -->
-    <div id="differences" class="section hidden max-w-5xl mx-auto px-6 py-12">
-        <div class="bg-white rounded-3xl shadow-2xl p-10 border border-amber-200">
-            <div class="flex items-center gap-x-5 mb-8">
-                <div class="text-6xl">🇺🇸</div>
-                <div>
-                    <h2 class="text-5xl font-extrabold text-slate-900 header-font">Ohio vs Minnesota</h2>
-                    <p class="text-2xl text-amber-700 font-semibold mt-2">Important things that are DIFFERENT here in Minnesota</p>
+    <div id="differences" class="section hidden max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <div class="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-6 sm:p-10 border border-amber-200">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-x-5 mb-6 sm:mb-8">
+                <div class="text-5xl sm:text-6xl shrink-0" role="img" aria-label="United States">🇺🇸</div>
+                <div class="min-w-0">
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 header-font">Ohio vs Minnesota</h2>
+                    <p class="text-lg sm:text-2xl text-amber-700 font-semibold mt-2">Important things that are DIFFERENT here in Minnesota</p>
                 </div>
             </div>
 
-            <div class="space-y-8 text-xl">
-                <div class="flex gap-6 bg-amber-50 p-6 rounded-2xl">
-                    <div class="w-16 flex-shrink-0"><i class="fas fa-car-side text-4xl text-amber-600"></i></div>
+            <div class="space-y-6 sm:space-y-8 text-base sm:text-xl">
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 bg-amber-50 p-4 sm:p-6 rounded-2xl">
+                    <div class="w-12 sm:w-16 flex sm:shrink-0 justify-center sm:justify-start"><i class="fas fa-car-side text-3xl sm:text-4xl text-amber-600"></i></div>
                     <div>
-                        <h4 class="font-extrabold text-2xl mb-2">Seat Belt Law</h4>
+                        <h4 class="font-extrabold text-xl sm:text-2xl mb-2">Seat Belt Law</h4>
                         <p><span class="font-bold text-emerald-700">Minnesota (PRIMARY):</span> Police can pull you over <strong>just for not wearing your seat belt</strong>. Every person in every seat must be buckled up. Fine: $25.</p>
                         <p class="mt-2 text-amber-700"><span class="font-bold">Ohio (SECONDARY):</span> They can only ticket you if they stopped you for something else first. Usually only front seat required in many cases.</p>
                     </div>
                 </div>
 
-                <div class="flex gap-6 bg-amber-50 p-6 rounded-2xl">
-                    <div class="w-16 flex-shrink-0"><i class="fas fa-mobile-alt text-4xl text-amber-600"></i></div>
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 bg-amber-50 p-4 sm:p-6 rounded-2xl">
+                    <div class="w-12 sm:w-16 flex sm:shrink-0 justify-center sm:justify-start"><i class="fas fa-mobile-alt text-3xl sm:text-4xl text-amber-600"></i></div>
                     <div>
-                        <h4 class="font-extrabold text-2xl mb-2">Cell Phone / Hands-Free Law</h4>
+                        <h4 class="font-extrabold text-xl sm:text-2xl mb-2">Cell Phone / Hands-Free Law</h4>
                         <p><span class="font-bold text-emerald-700">Minnesota:</span> You <strong>CANNOT hold your phone at all</strong> while driving — even when stopped at a red light or in traffic. Must be mounted or use voice commands / single touch only. Fines start at $100+.</p>
                         <p class="mt-2 text-amber-700"><span class="font-bold">Ohio:</span> Texting is banned, but holding the phone for calls may be allowed in some situations (check current Ohio law). MN is stricter.</p>
                     </div>
                 </div>
 
-                <div class="flex gap-6 bg-amber-50 p-6 rounded-2xl">
-                    <div class="w-16 flex-shrink-0"><i class="fas fa-snowflake text-4xl text-amber-600"></i></div>
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 bg-amber-50 p-4 sm:p-6 rounded-2xl">
+                    <div class="w-12 sm:w-16 flex sm:shrink-0 justify-center sm:justify-start"><i class="fas fa-snowflake text-3xl sm:text-4xl text-amber-600"></i></div>
                     <div>
-                        <h4 class="font-extrabold text-2xl mb-2">Winter Driving</h4>
+                        <h4 class="font-extrabold text-xl sm:text-2xl mb-2">Winter Driving</h4>
                         <p><span class="font-bold text-emerald-700">Minnesota:</span> The test has many questions about snow, ice, black ice, snowplows, and what to do if stranded. You must clear every bit of snow/ice. Headlights required in snow/rain/fog.</p>
                         <p class="mt-2 text-amber-700"><span class="font-bold">Ohio:</span> Winters are milder. Less emphasis on these topics on the Ohio test.</p>
                     </div>
                 </div>
 
-                <div class="flex gap-6 bg-amber-50 p-6 rounded-2xl">
-                    <div class="w-16 flex-shrink-0"><i class="fas fa-exclamation-triangle text-4xl text-amber-600"></i></div>
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 bg-amber-50 p-4 sm:p-6 rounded-2xl">
+                    <div class="w-12 sm:w-16 flex sm:shrink-0 justify-center sm:justify-start"><i class="fas fa-exclamation-triangle text-3xl sm:text-4xl text-amber-600"></i></div>
                     <div>
-                        <h4 class="font-extrabold text-2xl mb-2">Other Big Differences</h4>
+                        <h4 class="font-extrabold text-xl sm:text-2xl mb-2">Other Big Differences</h4>
                         <ul class="list-disc pl-6 space-y-2 text-lg">
                             <li><strong>Move Over Law</strong> is very strictly enforced in MN — slow down AND move over for any stopped emergency, tow, or road work vehicle with lights.</li>
                             <li><strong>School bus</strong> rules are the same, but MN has specific rules about divided highways (you don't stop if bus is on opposite side of divided road).</li>
@@ -375,32 +443,32 @@
                 </div>
             </div>
 
-            <div class="mt-10 p-6 bg-blue-700 text-white rounded-2xl text-center">
-                <p class="text-2xl font-semibold">Don't worry — the quiz below includes all these MN-specific rules!</p>
-                <button onclick="showSection('quiz')" class="mt-6 large-btn bg-white text-blue-700 hover:bg-blue-100 px-10 py-3">Start Practicing Now →</button>
+            <div class="mt-8 sm:mt-10 p-5 sm:p-6 bg-blue-700 text-white rounded-2xl text-center">
+                <p class="text-lg sm:text-2xl font-semibold px-1">Don't worry — the quiz below includes all these MN-specific rules!</p>
+                <button onclick="showSection('quiz')" class="mt-4 sm:mt-6 large-btn w-full max-w-sm mx-auto bg-white text-blue-700 hover:bg-blue-100 px-8 py-3">Start Practicing Now →</button>
             </div>
         </div>
     </div>
 
     <!-- QUIZ SECTION -->
-    <div id="quiz" class="section hidden max-w-[820px] mx-auto px-6 py-12">
+    <div id="quiz" class="section hidden max-w-[820px] mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div class="quiz-container">
             <!-- Quiz Header -->
-            <div class="flex justify-between items-center mb-8">
-                <div>
-                    <h2 class="text-4xl font-extrabold text-slate-900">Practice Quiz</h2>
-                    <p class="text-xl text-slate-600">40 questions • Just like the real test</p>
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 sm:mb-8">
+                <div class="min-w-0">
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900">Practice Quiz</h2>
+                    <p class="text-lg sm:text-xl text-slate-600">40 questions • Just like the real test</p>
                 </div>
-                <div class="text-right">
+                <div class="text-left sm:text-right w-full sm:w-auto">
                     <div id="progress-text" class="text-sm font-mono text-slate-500">Question <span id="current-q">1</span>/40</div>
-                    <div class="w-40 bg-slate-200 h-3 rounded-full mt-1.5 overflow-hidden">
+                    <div class="w-full sm:w-40 bg-slate-200 h-3 rounded-full mt-1.5 overflow-hidden max-w-full">
                         <div id="progress-bar" class="bg-blue-600 h-3 transition-all" style="width: 2.5%"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Question Card -->
-            <div class="bg-white rounded-3xl shadow-2xl p-10 border border-slate-100" id="question-card">
+            <div class="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-5 sm:p-8 md:p-10 border border-slate-100" id="question-card">
                 <div id="question-number" class="text-blue-600 font-bold text-lg mb-3"></div>
                 <div id="question-text" class="question-text text-slate-900 mb-8 leading-snug"></div>
                 
@@ -408,21 +476,21 @@
             </div>
 
             <!-- Quiz Controls -->
-            <div class="flex justify-between items-center mt-8">
+            <div class="flex flex-col-reverse sm:flex-row justify-between items-stretch sm:items-center gap-3 mt-6 sm:mt-8">
                 <button onclick="prevQuestion()" id="prev-btn"
-                        class="px-8 py-3.5 text-lg font-semibold bg-white border-2 border-slate-300 hover:bg-slate-50 rounded-3xl flex items-center gap-x-3 disabled:opacity-40">
+                        class="w-full sm:w-auto justify-center px-6 sm:px-8 py-3.5 text-base sm:text-lg font-semibold bg-white border-2 border-slate-300 hover:bg-slate-50 rounded-3xl flex items-center gap-x-3 disabled:opacity-40">
                     <i class="fas fa-arrow-left"></i> <span>Previous</span>
                 </button>
                 
                 <button onclick="nextQuestion()" id="next-btn"
-                        class="px-10 py-3.5 text-lg font-bold bg-blue-700 hover:bg-blue-800 text-white rounded-3xl flex items-center gap-x-3 shadow-lg">
+                        class="w-full sm:w-auto justify-center px-8 sm:px-10 py-3.5 text-base sm:text-lg font-bold bg-blue-700 hover:bg-blue-800 text-white rounded-3xl flex items-center gap-x-3 shadow-lg">
                     <span id="next-btn-text">Next Question</span> <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
 
             <div class="text-center mt-6">
                 <button onclick="submitQuiz()" id="submit-btn"
-                        class="hidden px-14 py-4 text-xl font-extrabold bg-emerald-600 hover:bg-emerald-700 text-white rounded-3xl shadow-xl flex items-center gap-x-3 mx-auto">
+                        class="hidden w-full sm:w-auto max-w-xl px-8 sm:px-14 py-4 text-lg sm:text-xl font-extrabold bg-emerald-600 hover:bg-emerald-700 text-white rounded-3xl shadow-xl flex items-center gap-x-3 mx-auto justify-center">
                     <i class="fas fa-check-double"></i>
                     <span>SUBMIT &amp; SEE MY SCORE</span>
                 </button>
@@ -431,24 +499,24 @@
     </div>
 
     <!-- Results Modal -->
-    <div id="results-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
-        <div class="bg-white rounded-3xl max-w-2xl w-full mx-4 shadow-2xl overflow-hidden">
-            <div class="px-10 pt-10 pb-8 text-center bg-gradient-to-br from-blue-700 to-blue-900 text-white">
-                <h3 class="text-4xl font-extrabold mb-2">Your Results</h3>
-                <div id="score-display" class="text-7xl font-black my-4"></div>
-                <p id="score-message" class="text-2xl font-semibold"></p>
+    <div id="results-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100] p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl sm:rounded-3xl max-w-2xl w-full my-auto shadow-2xl overflow-hidden max-h-[min(92vh,900px)] flex flex-col">
+            <div class="px-5 sm:px-10 pt-6 sm:pt-10 pb-6 sm:pb-8 text-center bg-gradient-to-br from-blue-700 to-blue-900 text-white shrink-0">
+                <h3 class="text-2xl sm:text-4xl font-extrabold mb-2">Your Results</h3>
+                <div id="score-display" class="text-4xl sm:text-6xl md:text-7xl font-black my-3 sm:my-4 break-words"></div>
+                <p id="score-message" class="text-lg sm:text-2xl font-semibold px-1"></p>
             </div>
             
-            <div class="p-10">
-                <div id="review-section" class="max-h-[420px] overflow-y-auto pr-2 space-y-4 text-lg"></div>
+            <div class="p-5 sm:p-10 min-h-0 flex flex-col flex-1 overflow-hidden">
+                <div id="review-section" class="max-h-[min(45vh,420px)] sm:max-h-[420px] overflow-y-auto pr-1 sm:pr-2 space-y-3 sm:space-y-4 text-base sm:text-lg"></div>
                 
-                <div class="flex gap-4 mt-10">
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 sm:mt-10 shrink-0">
                     <button onclick="restartQuiz()" 
-                            class="flex-1 py-4 text-xl font-bold bg-white border-2 border-blue-700 text-blue-700 hover:bg-blue-50 rounded-3xl flex items-center justify-center gap-x-3">
+                            class="flex-1 py-3.5 sm:py-4 text-lg sm:text-xl font-bold bg-white border-2 border-blue-700 text-blue-700 hover:bg-blue-50 rounded-3xl flex items-center justify-center gap-x-3">
                         <i class="fas fa-redo"></i> <span>Take Again</span>
                     </button>
                     <button onclick="showSection('study'); closeResults()" 
-                            class="flex-1 py-4 text-xl font-bold bg-blue-700 hover:bg-blue-800 text-white rounded-3xl flex items-center justify-center gap-x-3">
+                            class="flex-1 py-3.5 sm:py-4 text-lg sm:text-xl font-bold bg-blue-700 hover:bg-blue-800 text-white rounded-3xl flex items-center justify-center gap-x-3">
                         <span>Review Study Guide</span>
                     </button>
                 </div>
@@ -456,7 +524,7 @@
         </div>
     </div>
 
-    <footer class="text-center py-8 text-sm text-slate-400">
+    <footer class="text-center py-6 sm:py-8 px-4 text-xs sm:text-sm text-slate-400">
         Made with love for the best mom in Minnesota • All questions based on official 2025-2026 Minnesota Driver’s Manual
     </footer>
 
@@ -754,7 +822,53 @@
         let userAnswers = [];
         let quizStarted = false;
 
+        function toggleNav() {
+            const panel = document.getElementById('nav-panel');
+            const btn = document.getElementById('nav-toggle');
+            const icon = document.getElementById('nav-toggle-icon');
+            if (!panel || !btn || !icon) return;
+            if (window.matchMedia('(min-width: 1024px)').matches) return;
+            const open = panel.classList.toggle('is-open');
+            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            icon.classList.remove('fa-bars', 'fa-times');
+            icon.classList.add(open ? 'fa-times' : 'fa-bars');
+        }
+
+        function closeNavMobile() {
+            const panel = document.getElementById('nav-panel');
+            const btn = document.getElementById('nav-toggle');
+            const icon = document.getElementById('nav-toggle-icon');
+            if (!panel || !btn || !icon) return;
+            if (window.matchMedia('(min-width: 1024px)').matches) {
+                panel.classList.remove('is-open');
+                return;
+            }
+            panel.classList.remove('is-open');
+            btn.setAttribute('aria-expanded', 'false');
+            icon.classList.remove('fa-bars', 'fa-times');
+            icon.classList.add('fa-bars');
+        }
+
+        function navGo(section) {
+            showSection(section);
+        }
+
+        window.addEventListener('resize', function () {
+            if (window.matchMedia('(min-width: 1024px)').matches) {
+                const panel = document.getElementById('nav-panel');
+                const btn = document.getElementById('nav-toggle');
+                const icon = document.getElementById('nav-toggle-icon');
+                if (panel) panel.classList.remove('is-open');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+        });
+
         function showSection(section) {
+            closeNavMobile();
             // Hide all sections
             document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
             
@@ -800,7 +914,7 @@
             
             q.options.forEach((option, index) => {
                 const btn = document.createElement('button');
-                btn.className = `option-btn w-full text-left px-6 py-4 border-2 border-slate-300 hover:border-blue-500 rounded-2xl flex items-start gap-x-4 text-lg ${userAnswers[currentQuestionIndex] === index ? 'selected' : ''}`;
+                btn.className = `option-btn w-full text-left px-4 sm:px-6 py-3 sm:py-4 border-2 border-slate-300 hover:border-blue-500 rounded-2xl flex items-start gap-x-3 sm:gap-x-4 text-base sm:text-lg ${userAnswers[currentQuestionIndex] === index ? 'selected' : ''}`;
                 btn.innerHTML = `
                     <div class="w-8 h-8 flex-shrink-0 mt-0.5 flex items-center justify-center border-2 border-slate-400 rounded-full text-sm font-bold">
                         ${String.fromCharCode(65 + index)}
@@ -882,15 +996,15 @@
                 const correctChoice = q.options[q.correct];
                 
                 reviewHTML.push(`
-                    <div class="border-l-4 ${isCorrect ? 'border-emerald-500' : 'border-red-500'} bg-slate-50 p-5 rounded-r-2xl">
-                        <div class="flex justify-between items-start mb-2">
-                            <div class="font-bold text-lg">Q${i+1}. ${q.q}</div>
-                            ${status}
+                    <div class="border-l-4 ${isCorrect ? 'border-emerald-500' : 'border-red-500'} bg-slate-50 p-4 sm:p-5 rounded-r-2xl">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-2">
+                            <div class="font-bold text-base sm:text-lg min-w-0">Q${i+1}. ${q.q}</div>
+                            <div class="shrink-0">${status}</div>
                         </div>
-                        <div class="text-base mt-3">
+                        <div class="text-sm sm:text-base mt-3">
                             <div class="mb-1"><span class="font-semibold text-slate-600">Your answer:</span> ${userChoice}</div>
                             ${!isCorrect ? `<div class="mb-1"><span class="font-semibold text-emerald-700">Correct answer:</span> ${correctChoice}</div>` : ''}
-                            <div class="mt-3 text-sm bg-white p-3 rounded-xl border"><strong>Why:</strong> ${q.explanation}</div>
+                            <div class="mt-3 text-xs sm:text-sm bg-white p-3 rounded-xl border"><strong>Why:</strong> ${q.explanation}</div>
                         </div>
                     </div>
                 `);
@@ -900,7 +1014,7 @@
             const passed = percentage >= 80;
             
             // Show results
-            document.getElementById('score-display').innerHTML = `${score} / ${quizQuestions.length} <span class="text-4xl align-super">(${percentage}%)</span>`;
+            document.getElementById('score-display').innerHTML = `${score} / ${quizQuestions.length} <span class="text-2xl sm:text-4xl align-super font-black">(${percentage}%)</span>`;
             document.getElementById('score-message').innerHTML = passed ? 
                 `🎉 Excellent work, Mom! You passed with flying colors!` : 
                 `Keep practicing — you're so close! Review the study guide and try again.`;
