@@ -109,7 +109,7 @@ Double-click [`Minnesota_Drivers_License_Quiz_for_Mom.html`](./Minnesota_Drivers
 
 ## Deploy to Vercel
 
-This repo is configured as a **static** site: [`vercel.json`](./vercel.json) maps `/` to [`Minnesota_Drivers_License_Quiz_for_Mom.html`](./Minnesota_Drivers_License_Quiz_for_Mom.html) and skips a real `npm install` / build on Vercel (the quiz loads Tailwind/fonts from CDNs).
+[`vercel.json`](./vercel.json) runs a tiny build that copies [`Minnesota_Drivers_License_Quiz_for_Mom.html`](./Minnesota_Drivers_License_Quiz_for_Mom.html) into `public/index.html` and sets Vercel **Output Directory** to `public`. Tailwind/fonts still load from CDNs.
 
 1. Push to GitHub, then **Import Project** at [vercel.com/new](https://vercel.com/new) (framework: **Other**), or deploy from CLI after `npx vercel login`:
 

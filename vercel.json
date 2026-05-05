@@ -1,11 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "echo 'static'",
-  "buildCommand": "echo 'static'",
-  "rewrites": [
-    {
-      "source": "/",
-      "destination": "/Minnesota_Drivers_License_Quiz_for_Mom.html"
-    }
-  ]
+  "installCommand": "echo static",
+  "buildCommand": "mkdir -p public && cp Minnesota_Drivers_License_Quiz_for_Mom.html public/index.html",
+  "outputDirectory": "public"
 }
